@@ -52,11 +52,14 @@ import Foundation
             if(self.isCommandNotFoundError(error) && self.isInStrictMode() && !handlerFound){
                 fatalError(String(error!))
             }else if(self.isCommandNotFoundError(error) && !handlerFound){
-                completion?(self.identifier(),(error as! NSObject),nil)
+                completion?(self.identifier(),(error as! NSObject?),nil)
+            }else if(self.isCommandNotFoundError(error) && handlerFound){
+
             }else if(error != nil && !self.isCommandNotFoundError(error)){
-                completion?(self.identifier(),(error as! NSObject),nil)
+                completion?(self.identifier(),(error as! NSObject?),nil)
             }else{
-                completion?(self.identifier(),(result as! NSObject),nil)
+                let acommand = String(command)
+                completion?(self.identifier(),(result as! NSObject?),nil)
             }
         }
     }
@@ -95,9 +98,9 @@ import Foundation
                         
                         if(myError != nil){
                             let realError : NSError = myError.memory!
-                            myCompletion?(result: (myResult as! ResultType),error: realError)
+                            myCompletion?(result: (myResult as! ResultType?),error: realError)
                         }else{
-                            myCompletion?(result: (myResult as! ResultType),error: nil)
+                            myCompletion?(result: (myResult as! ResultType?),error: nil)
                         }
                         
                         return true

@@ -58,7 +58,6 @@ import Foundation
             }else if(error != nil && !self.isCommandNotFoundError(error)){
                 completion?(self.identifier(),(error as! NSObject?),nil)
             }else{
-                let acommand = String(command)
                 completion?(self.identifier(),(result as! NSObject?),nil)
             }
         }

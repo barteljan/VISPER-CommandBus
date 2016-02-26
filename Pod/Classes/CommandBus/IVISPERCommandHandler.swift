@@ -16,4 +16,8 @@ import Foundation
     func identifier() -> String
     
     func processCommand(command: NSObject, completion: ((String?, NSObject?, NSErrorPointer) -> Bool)?)
+    
+    
+    optional func isResponsibleForCommand(command: NSObject,error:NSErrorPointer) -> Bool
+
 }

@@ -10,9 +10,7 @@ import Foundation
 
 @objc public protocol IVISPERCommandBus : IVISPERCommandHandler {
     
-    func isInStrictMode() -> Bool
-    func setStrictMode(isInStrictMode: Bool)
-    
     func addHandler(commandHandler: AnyObject!)
     func removeHandler(commandHandler: AnyObject!)
+    
 }

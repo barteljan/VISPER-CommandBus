@@ -11,10 +11,9 @@ import Foundation
 public protocol CommandBusProtocol {
     
     func isResponsible(command: Any!) -> Bool
-    func process<ResultType>(command: Any!, completion: ((result: ResultType?, error: ErrorType?) -> Void)?) throws
+    func process<ResultType>(command: Any!, completion: ((result: ResultType?, error: ErrorType?) -> Void)?)  throws 
     func process(command: Any!) throws
-    func isInStrictMode() -> Bool
-    func setStrictMode(isInStrictMode: Bool)
+
     
     func addHandler(handler:CommandHandlerProtocol)
     func removeHandler(handler:CommandHandlerProtocol)

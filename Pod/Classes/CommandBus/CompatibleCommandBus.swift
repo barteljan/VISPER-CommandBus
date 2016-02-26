@@ -8,7 +8,10 @@
 
 import Foundation
 
+
 public class CompatibleCommandBus: CommandBus,CompatibleCommandBusProtocol {
+    
+    let CommandNotFoundErrorDomain = "CommandNotFoundErrorDomain"
     
     //just for objective c compatability
     public func process(command: AnyObject!, completion: ((result: AnyObject?, error: AnyObject?) -> Void)?){
@@ -20,9 +23,21 @@ public class CompatibleCommandBus: CommandBus,CompatibleCommandBusProtocol {
                     completion?(result: myResult, error: nil)
                 }
             }
-        }catch{
-            
+        }catch let error {
+            if(error is CommandHandlerNotFoundError){
+                let myError = error as! CommandHandlerNotFoundError
+                let nsError = self.nsErrorFor(myError)
+                completion?(result: nil, error: nsError)
+            }else{
+                completion?(result: nil, error: (error as! AnyObject))
+            }
         }
+    }
+    
+    func nsErrorFor(myError:CommandHandlerNotFoundError) -> NSError{
+        let userInfo : [NSObject : AnyObject] = [NSLocalizedDescriptionKey : "CommandHandler for command:" + String(myError.command) + " not found!"]
+        let nsError = NSError(domain: self.CommandNotFoundErrorDomain, code: 2, userInfo: userInfo)
+        return nsError
     }
     
     public func addHandler(handler:AnyObject){

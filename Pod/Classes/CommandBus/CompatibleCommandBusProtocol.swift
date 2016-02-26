@@ -15,4 +15,6 @@ public protocol CompatibleCommandBusProtocol{
     func removeHandler(handler:AnyObject)
     func process(command: AnyObject!, completion: ((result: AnyObject?, error: AnyObject?) -> Void)?)
     
+   
+    
 }

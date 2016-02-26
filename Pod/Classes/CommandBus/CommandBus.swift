@@ -8,20 +8,15 @@
 
 import Foundation
 
+public struct CommandHandlerNotFoundError: ErrorType{
+    public let command : Any!
+    
+}
+
 public class CommandBus: NSObject,CommandBusProtocol {
     
-    internal var _strictMode : Bool = false
-    internal var handlers = [CommandHandlerProtocol]()
-    
- 
-    public func isInStrictMode() -> Bool{
-        return self._strictMode
-    }
-    
-    public func setStrictMode(isInStrictMode: Bool){
-        self._strictMode = isInStrictMode
-    }
 
+    internal var handlers = [CommandHandlerProtocol]()
     
     public func isResponsible(command: Any!) -> Bool{
        for commandHandler in self.handlers{
@@ -34,11 +29,18 @@ public class CommandBus: NSObject,CommandBusProtocol {
     
     
     public func process<ResultType>(command: Any!, completion: ((result: ResultType?, error: ErrorType?) -> Void)?) throws {
+
+        var handlerFound = false;
         
         for commandHandler in self.handlers{
             if(commandHandler.isResponsible(command)){
                 try commandHandler.process(command, completion: completion)
+                handlerFound = true
             }
+        }
+        
+        if(!handlerFound){
+            throw CommandHandlerNotFoundError(command: command)
         }
         
     }

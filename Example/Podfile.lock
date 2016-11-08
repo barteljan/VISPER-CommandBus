@@ -1,5 +1,5 @@
 PODS:
-  - VISPER-CommandBus (0.1.0)
+  - VISPER-CommandBus (0.1.5)
 
 DEPENDENCIES:
   - VISPER-CommandBus (from `../`)
@@ -9,6 +9,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  VISPER-CommandBus: 7a59c206c7b42c6dd168d24eef1f93ca0fbca167
+  VISPER-CommandBus: 3b17e67eeda99b81eb6dbed8e052c9e5b368e135
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: eac9ed1d552e600720d0189a7fab8cbb7eacab06
+
+COCOAPODS: 1.1.0.rc.2

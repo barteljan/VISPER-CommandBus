@@ -1,11 +1,11 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'VISPER-CommandBus_Example', :exclusive => true do
+target 'VISPER-CommandBus_Example' do
   pod 'VISPER-CommandBus', :path => '../'
 end
 
-target 'VISPER-CommandBus_Tests', :exclusive => true do
+target 'VISPER-CommandBus_Tests' do
   pod 'VISPER-CommandBus', :path => '../'
 
   

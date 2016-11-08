@@ -8,17 +8,17 @@
 
 import Foundation
 
-public struct CommandHandlerNotFoundError: ErrorType{
+public struct CommandHandlerNotFoundError: Error{
     public let command : Any!
     
 }
 
-public class CommandBus: NSObject,CommandBusProtocol {
+open class CommandBus: NSObject,CommandBusProtocol {
     
 
     internal var handlers = [CommandHandlerProtocol]()
     
-    public func isResponsible(command: Any!) -> Bool{
+    open func isResponsible(_ command: Any!) -> Bool{
        for commandHandler in self.handlers{
             if(commandHandler.isResponsible(command)){
                 return true
@@ -28,7 +28,7 @@ public class CommandBus: NSObject,CommandBusProtocol {
     }
     
     
-    public func process<ResultType>(command: Any!, completion: ((result: ResultType?, error: ErrorType?) -> Void)?) throws {
+    open func process<ResultType>(_ command: Any!, completion: ((_ result: ResultType?, _ error: Error?) -> Void)?) throws {
 
         var handlerFound = false;
         
@@ -45,7 +45,7 @@ public class CommandBus: NSObject,CommandBusProtocol {
         
     }
     
-    public func addHandler(handler:CommandHandlerProtocol){
+    open func addHandler(_ handler:CommandHandlerProtocol){
         
         let contained = self.handlers.contains { (aHandler:CommandHandlerProtocol) -> Bool in
             if(handler===aHandler){
@@ -61,9 +61,9 @@ public class CommandBus: NSObject,CommandBusProtocol {
     
    
     
-    public func removeHandler(handler:CommandHandlerProtocol){
+    open func removeHandler(_ handler:CommandHandlerProtocol){
     
-        let index = self.handlers.indexOf { (aHandler:CommandHandlerProtocol) -> Bool in
+        let index = self.handlers.index { (aHandler:CommandHandlerProtocol) -> Bool in
             if(aHandler === handler){
                 return true
             }
@@ -71,7 +71,7 @@ public class CommandBus: NSObject,CommandBusProtocol {
         }
         
         if let anIndex = index{
-            self.handlers.removeAtIndex(anIndex)
+            self.handlers.remove(at: anIndex)
         }
 
     }

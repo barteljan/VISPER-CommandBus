@@ -10,7 +10,7 @@ import Foundation
 
 @objc public protocol IVISPERCommandBus : IVISPERCommandHandler {
     
-    func addHandler(commandHandler: AnyObject!)
-    func removeHandler(commandHandler: AnyObject!)
+    func addHandler(_ commandHandler: AnyObject!)
+    func removeHandler(_ commandHandler: AnyObject!)
     
 }

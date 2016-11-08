@@ -8,24 +8,24 @@
 
 import Foundation
 
- @objc public class VISPERCommandBus: CompatibleCommandBus,IVISPERCommandBus {
+ @objc open class VISPERCommandBus: CompatibleCommandBus,IVISPERCommandBus {
 
     internal var _strictMode : Bool = false
     
-    public func isInStrictMode() -> Bool{
+    open func isInStrictMode() -> Bool{
         return self._strictMode
     }
     
-    public func setStrictMode(isInStrictMode: Bool){
+    open func setStrictMode(_ isInStrictMode: Bool){
         self._strictMode = isInStrictMode
     }
     
-    var _identifier = String(self)
+    var _identifier = String(describing: self)
     
     var commandHandlers = [IVISPERCommandHandler]()
     
     
-    public func isResponsibleForCommand(command: NSObject) -> Bool{
+    open func isResponsibleForCommand(_ command: NSObject) -> Bool{
         if(super.isResponsible(command)){
             return true
         }
@@ -33,11 +33,11 @@ import Foundation
         return false
     }
     
-    public func identifier() -> String{
+    open func identifier() -> String{
         return self._identifier
     }
     
-    public func processCommand(command: NSObject, completion: ((String?, NSObject?, NSErrorPointer) -> Bool)?){
+    open func processCommand(_ command: NSObject, completion: ((String?, NSObject?, NSErrorPointer) -> Bool)?){
         
         var handlerFound = false
         
@@ -50,7 +50,7 @@ import Foundation
         
         super.process(command) { (result: AnyObject?, error: AnyObject?) -> Void in
             if(self.isCommandNotFoundError(error) && self.isInStrictMode() && !handlerFound){
-                fatalError(String(error!))
+                fatalError(String(describing: error!))
             }else if(self.isCommandNotFoundError(error) && !handlerFound){
                 completion?(self.identifier(),(error as! NSObject?),nil)
             }else if(self.isCommandNotFoundError(error) && handlerFound){
@@ -63,7 +63,7 @@ import Foundation
         }
     }
     
-    func isCommandNotFoundError(error: Any?) -> Bool{
+    func isCommandNotFoundError(_ error: Any?) -> Bool{
         if(error != nil){
             if let nserror = error as? NSError {
                 if(nserror.domain == self.CommandNotFoundErrorDomain && self.isInStrictMode()){
@@ -75,7 +75,7 @@ import Foundation
     }
     
     
-    public override func process<ResultType>(command: Any!, completion: ((result: ResultType?, error: ErrorType?) -> Void)?) throws {
+    open override func process<ResultType>(_ command: Any!, completion: ((_ result: ResultType?, _ error: Error?) -> Void)?) throws {
         
         let myCompletion = completion
         var handlerFound = false
@@ -85,7 +85,7 @@ import Foundation
             handlerFound = true
         }catch let anError{
             if(!self.isCommandNotFoundError(anError)){
-                completion?(result: nil,error: anError)
+                completion?(nil,anError)
             }
         }
         
@@ -93,13 +93,13 @@ import Foundation
         if let myCommand = command as? NSObject{
             for handler in self.commandHandlers{
                 if(handler.isResponsibleForCommand(myCommand)){
-                    handler.processCommand(myCommand, completion: { (identifier: String?, myResult: NSObject?, myError: NSErrorPointer) -> Bool in
+                    handler.processCommand(myCommand, completion: { (identifier: String?, myResult: NSObject?, myError: NSErrorPointer?) -> Bool in
                         
                         if(myError != nil){
-                            let realError : NSError = myError.memory!
-                            myCompletion?(result: (myResult as! ResultType?),error: realError)
+                            let realError : NSError = myError!!.pointee!
+                            myCompletion?((myResult as! ResultType?),realError)
                         }else{
-                            myCompletion?(result: (myResult as! ResultType?),error: nil)
+                            myCompletion?((myResult as! ResultType?),nil)
                         }
                         
                         return true
@@ -114,25 +114,25 @@ import Foundation
             let swiftError = CommandHandlerNotFoundError(command: command)
             let nsError = self.nsErrorFor(swiftError)
             if(self.isInStrictMode()){
-                fatalError(String(nsError))
+                fatalError(String(describing: nsError))
             }else{
                 throw swiftError
             }
         }
     }
     
-    public override func process(command: AnyObject!, completion: ((result: AnyObject?, error: AnyObject?) -> Void)?) {
+    open override func process(_ command: AnyObject!, completion: ((_ result: AnyObject?, _ error: AnyObject?) -> Void)?) {
         super.process(command) { (result, error) -> Void in
             if(self.isCommandNotFoundError(error) && self.isInStrictMode()){
-                fatalError(String(error))
+                fatalError(String(describing: error))
             }else{
-                completion?(result: result,error: error)
+                completion?(result,error)
             }
         }
     }
 
     
-    public override func addHandler(handler: AnyObject) {
+    open override func addHandler(_ handler: AnyObject) {
         if(handler is IVISPERCommandHandler){
             self.commandHandlers.append(handler as! IVISPERCommandHandler)
         }else if(handler is CommandHandlerProtocol){
@@ -143,8 +143,8 @@ import Foundation
         
     }
     
-    public override func removeHandler(handler: AnyObject) {
-        let index = self.commandHandlers.indexOf { (aHandler:IVISPERCommandHandler) -> Bool in
+    open override func removeHandler(_ handler: AnyObject) {
+        let index = self.commandHandlers.index { (aHandler:IVISPERCommandHandler) -> Bool in
             if(aHandler === handler){
                 return true
             }
@@ -152,7 +152,7 @@ import Foundation
         }
         
         if let anIndex = index{
-            self.commandHandlers.removeAtIndex(anIndex)
+            self.commandHandlers.remove(at: anIndex)
         }
     }
     

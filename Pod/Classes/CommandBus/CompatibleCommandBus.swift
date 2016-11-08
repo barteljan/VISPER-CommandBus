@@ -9,42 +9,42 @@
 import Foundation
 
 
-public class CompatibleCommandBus: CommandBus,CompatibleCommandBusProtocol {
+open class CompatibleCommandBus: CommandBus,CompatibleCommandBusProtocol {
     
     let CommandNotFoundErrorDomain = "CommandNotFoundErrorDomain"
     
     //just for objective c compatability
-    public func process(command: AnyObject!, completion: ((result: AnyObject?, error: AnyObject?) -> Void)?){
+    open func process(_ command: AnyObject!, completion: ((_ result: AnyObject?, _ error: AnyObject?) -> Void)?){
         do{
-            try super.process(command) { (myResult : AnyObject?, myError: ErrorType?) -> Void in
+            try super.process(command) { (myResult : AnyObject?, myError: Error?) -> Void in
                 if(myError != nil){
-                    completion?(result: myResult, error: (myError as! AnyObject))
+                    completion?(myResult, (myError as! AnyObject))
                 }else{
-                    completion?(result: myResult, error: nil)
+                    completion?(myResult, nil)
                 }
             }
         }catch let error {
             if(error is CommandHandlerNotFoundError){
                 let myError = error as! CommandHandlerNotFoundError
                 let nsError = self.nsErrorFor(myError)
-                completion?(result: nil, error: nsError)
+                completion?(nil, nsError)
             }else{
-                completion?(result: nil, error: (error as! AnyObject))
+                completion?(nil, (error as AnyObject))
             }
         }
     }
     
-    func nsErrorFor(myError:CommandHandlerNotFoundError) -> NSError{
-        let userInfo : [NSObject : AnyObject] = [NSLocalizedDescriptionKey : "CommandHandler for command:" + String(myError.command) + " not found!"]
+    func nsErrorFor(_ myError:CommandHandlerNotFoundError) -> NSError{
+        let userInfo : [AnyHashable: Any] = [NSLocalizedDescriptionKey : "CommandHandler for command:" + String(describing: myError.command) + " not found!"]
         let nsError = NSError(domain: self.CommandNotFoundErrorDomain, code: 2, userInfo: userInfo)
         return nsError
     }
     
-    public func addHandler(handler:AnyObject){
+    open func addHandler(_ handler:AnyObject){
         super.addHandler(handler as! CommandHandlerProtocol)
     }
     
-    public func removeHandler(handler:AnyObject){
+    open func removeHandler(_ handler:AnyObject){
         super.removeHandler(handler as! CommandHandlerProtocol)
     }
 

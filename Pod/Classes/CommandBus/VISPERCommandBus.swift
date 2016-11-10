@@ -20,7 +20,7 @@ import Foundation
         self._strictMode = isInStrictMode
     }
     
-    var _identifier = String(describing: self)
+    var _identifier = "VISPERCommandBus"
     
     var commandHandlers = [IVISPERCommandHandler]()
     

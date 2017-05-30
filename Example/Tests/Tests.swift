@@ -1,6 +1,5 @@
 import UIKit
 import XCTest
-import VISPER-CommandBus
 
 class Tests: XCTestCase {
     

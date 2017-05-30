@@ -26,6 +26,14 @@ import Foundation
     
     
     public func isResponsibleForCommand(command: NSObject) -> Bool{
+        
+        for handler in self.commandHandlers{
+            if(handler.isResponsibleForCommand(command)){
+                return true
+            }
+        }
+        
+        
         if(super.isResponsible(command)){
             return true
         }

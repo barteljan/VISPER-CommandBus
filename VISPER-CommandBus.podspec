@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "VISPER-CommandBus"
-  s.version          = "0.1.6"
+  s.version          = "0.1.7"
   s.summary          = "A command bus implementation for the visper application framework"
 
   s.description      = <<-DESC

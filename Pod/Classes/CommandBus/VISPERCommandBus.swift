@@ -60,13 +60,13 @@ import Foundation
             if(self.isCommandNotFoundError(error) && self.isInStrictMode() && !handlerFound){
                 fatalError(String(describing: error!))
             }else if(self.isCommandNotFoundError(error) && !handlerFound){
-                completion?(self.identifier(),(error as! NSObject?),nil)
+                _ = completion?(self.identifier(),(error as! NSObject?),nil)
             }else if(self.isCommandNotFoundError(error) && handlerFound){
 
             }else if(error != nil && !self.isCommandNotFoundError(error)){
-                completion?(self.identifier(),(error as! NSObject?),nil)
+                _ = completion?(self.identifier(),(error as! NSObject?),nil)
             }else{
-                completion?(self.identifier(),(result as! NSObject?),nil)
+                _ = completion?(self.identifier(),(result as! NSObject?),nil)
             }
         }
     }

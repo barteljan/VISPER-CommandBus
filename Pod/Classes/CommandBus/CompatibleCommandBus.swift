@@ -18,7 +18,7 @@ open class CompatibleCommandBus: CommandBus,CompatibleCommandBusProtocol {
         do{
             try super.process(command) { (myResult : AnyObject?, myError: Error?) -> Void in
                 if(myError != nil){
-                    completion?(myResult, (myError as! AnyObject))
+                    completion?(myResult, (myError as AnyObject))
                 }else{
                     completion?(myResult, nil)
                 }

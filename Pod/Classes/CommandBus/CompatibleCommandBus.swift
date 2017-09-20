@@ -11,10 +11,10 @@ import Foundation
 
 open class CompatibleCommandBus: CommandBus,CompatibleCommandBusProtocol {
     
-    let CommandNotFoundErrorDomain = "CommandNotFoundErrorDomain"
+    @objc let CommandNotFoundErrorDomain = "CommandNotFoundErrorDomain"
     
     //just for objective c compatability
-    open func process(_ command: AnyObject!, completion: ((_ result: AnyObject?, _ error: AnyObject?) -> Void)?){
+    @objc open func process(_ command: AnyObject!, completion: ((_ result: AnyObject?, _ error: AnyObject?) -> Void)?){
         do{
             try super.process(command) { (myResult : AnyObject?, myError: Error?) -> Void in
                 if(myError != nil){
@@ -35,16 +35,16 @@ open class CompatibleCommandBus: CommandBus,CompatibleCommandBusProtocol {
     }
     
     func nsErrorFor(_ myError:CommandHandlerNotFoundError) -> NSError{
-        let userInfo : [AnyHashable: Any] = [NSLocalizedDescriptionKey : "CommandHandler for command:" + String(describing: myError.command) + " not found!"]
+        let userInfo : [String: Any] = [NSLocalizedDescriptionKey : "CommandHandler for command:" + String(describing: myError.command) + " not found!"]
         let nsError = NSError(domain: self.CommandNotFoundErrorDomain, code: 2, userInfo: userInfo)
         return nsError
     }
     
-    open func addHandler(_ handler:AnyObject){
+    @objc open func addHandler(_ handler:AnyObject){
         super.addHandler(handler as! CommandHandlerProtocol)
     }
     
-    open func removeHandler(_ handler:AnyObject){
+    @objc open func removeHandler(_ handler:AnyObject){
         super.removeHandler(handler as! CommandHandlerProtocol)
     }
 

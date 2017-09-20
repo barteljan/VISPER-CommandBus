@@ -18,7 +18,7 @@ open class CommandBus: NSObject,CommandBusProtocol {
 
     internal var handlers = [CommandHandlerProtocol]()
     
-    open func isResponsible(_ command: Any!) -> Bool{
+    @objc open func isResponsible(_ command: Any!) -> Bool{
        for commandHandler in self.handlers{
             if(commandHandler.isResponsible(command)){
                 return true

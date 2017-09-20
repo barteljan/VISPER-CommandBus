@@ -10,19 +10,19 @@ import Foundation
 
  @objc open class VISPERCommandBus: CompatibleCommandBus,IVISPERCommandBus {
 
-    internal var _strictMode : Bool = false
+    @objc internal var _strictMode : Bool = false
     
-    open func isInStrictMode() -> Bool{
+    @objc open func isInStrictMode() -> Bool{
         return self._strictMode
     }
     
-    open func setStrictMode(_ isInStrictMode: Bool){
+    @objc open func setStrictMode(_ isInStrictMode: Bool){
         self._strictMode = isInStrictMode
     }
     
-    var _identifier = "VISPERCommandBus"
+    @objc var _identifier = "VISPERCommandBus"
     
-    var commandHandlers = [IVISPERCommandHandler]()
+    @objc var commandHandlers = [IVISPERCommandHandler]()
     
     
     open func isResponsibleForCommand(_ command: NSObject) -> Bool{
@@ -71,7 +71,7 @@ import Foundation
         }
     }
     
-    func isCommandNotFoundError(_ error: Any?) -> Bool{
+    @objc func isCommandNotFoundError(_ error: Any?) -> Bool{
         if(error != nil){
             if let nserror = error as? NSError {
                 if(nserror.domain == self.CommandNotFoundErrorDomain && self.isInStrictMode()){

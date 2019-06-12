@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "VISPER-CommandBus"
-  s.version          = "1.0.1"
+  s.version          = "4.0.0"
   s.summary          = "A command bus implementation for the visper application framework"
 
   s.description      = <<-DESC
@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.requires_arc = true
   s.source_files = 'Pod/Classes/**/*'
-  s.swift_version = "4.0"
+  s.swift_version = "4.2"
 end

@@ -44,7 +44,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		C4BD1D6BCD5199F138EF35FE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		DC622F4F9AF01BE0B991764F /* VISPER-CommandBus.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "VISPER-CommandBus.podspec"; path = "../VISPER-CommandBus.podspec"; sourceTree = "<group>"; };
+		DC622F4F9AF01BE0B991764F /* VISPER-CommandBus.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "VISPER-CommandBus.podspec"; path = "../VISPER-CommandBus.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E3AFFBE96AA1B40DA5A26F33 /* Pods-VISPER-CommandBus_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VISPER-CommandBus_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VISPER-CommandBus_Example/Pods-VISPER-CommandBus_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		FF05A920169589FA3C6F886A /* Pods_VISPER_CommandBus_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VISPER_CommandBus_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -171,7 +171,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				7606686F7C9C055C83C97035 /* [CP] Embed Pods Frameworks */,
-				EFB7681C70F6E9EFD26D5AEC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -191,7 +190,6 @@
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
 				0A9823B3A54D52B0FC950AC6 /* [CP] Embed Pods Frameworks */,
-				E74D4DF694B20ABF6776AD56 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -272,7 +270,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VISPER-CommandBus_Tests/Pods-VISPER-CommandBus_Tests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VISPER-CommandBus_Tests/Pods-VISPER-CommandBus_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/VISPER-CommandBus/VISPER_CommandBus.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -281,7 +279,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VISPER-CommandBus_Tests/Pods-VISPER-CommandBus_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VISPER-CommandBus_Tests/Pods-VISPER-CommandBus_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5594C1DD6BD6AA195E82C6A7 /* [CP] Check Pods Manifest.lock */ = {
@@ -308,7 +306,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VISPER-CommandBus_Example/Pods-VISPER-CommandBus_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VISPER-CommandBus_Example/Pods-VISPER-CommandBus_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/VISPER-CommandBus/VISPER_CommandBus.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -317,7 +315,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VISPER-CommandBus_Example/Pods-VISPER-CommandBus_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VISPER-CommandBus_Example/Pods-VISPER-CommandBus_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C77AFF81BB25A8D36ACBFF22 /* [CP] Check Pods Manifest.lock */ = {
@@ -336,36 +334,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E74D4DF694B20ABF6776AD56 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VISPER-CommandBus_Tests/Pods-VISPER-CommandBus_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EFB7681C70F6E9EFD26D5AEC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VISPER-CommandBus_Example/Pods-VISPER-CommandBus_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -511,7 +479,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -526,7 +494,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

@@ -6,7 +6,5 @@ target 'VISPER-CommandBus_Example' do
 end
 
 target 'VISPER-CommandBus_Tests' do
-  pod 'VISPER-CommandBus', :path => '../'
-
-  
+  pod 'VISPER-CommandBus', :path => '../'  
 end
